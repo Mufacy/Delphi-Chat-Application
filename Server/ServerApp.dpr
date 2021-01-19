@@ -8,7 +8,7 @@ uses
 
 begin
   Application.Initialize;
-  Application.MainFormOnTaskbar := True;
+  Application.MainFormOnTaskbar := TRue;
   Application.CreateForm(TFChatServer, FChatServer);
   Application.Run;
 end.
