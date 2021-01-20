@@ -2,8 +2,9 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2021/01/18 22:29:54.000.162,=C:\Users\Muaz\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2021/01/18 22:30:48.000.162,D:\git-projects\Delphi-Chat-Application\Client\UClientChat.pas=C:\Users\Muaz\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2021/01/18 22:30:48.000.162,D:\git-projects\Delphi-Chat-Application\Client\UClientChat.dfm=C:\Users\Muaz\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2021/01/18 22:30:54.000.090,D:\git-projects\Delphi-Chat-Application\Client\ClientApp.dproj=C:\Users\Muaz\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2021/01/18 22:30:48.000.162,C:\Users\Muaz\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\git-projects\Delphi-Chat-Application\Client\UClientChat.dfm</Transaction>
+    <Transaction>2021/01/18 22:30:48.000.162,C:\Users\Muaz\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\git-projects\Delphi-Chat-Application\Client\UClientChat.pas</Transaction>
+    <Transaction>2021/01/18 22:30:54.000.090,C:\Users\Muaz\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\git-projects\Delphi-Chat-Application\Client\ClientApp.dproj</Transaction>
+    <Transaction>2021/01/20 16:40:34.278,=D:\git-projects\Delphi-Chat-Application\Client\ULogin.pas</Transaction>
   </Transactions>
 </BorlandProject>

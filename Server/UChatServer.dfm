@@ -36,8 +36,6 @@ object FChatServer: TFChatServer
     ParentFont = False
     TabOrder = 0
     VerticalAlignment = taAlignTop
-    ExplicitTop = 93
-    ExplicitWidth = 558
     object MEMHistory: TMemo
       Left = 0
       Top = 22
@@ -52,9 +50,6 @@ object FChatServer: TFChatServer
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      ExplicitLeft = 1
-      ExplicitTop = 18
-      ExplicitWidth = 515
     end
   end
   object PNLStatus: TPanel
@@ -85,12 +80,13 @@ object FChatServer: TFChatServer
       Color = clRed
       ParentBackground = False
       TabOrder = 0
-      ExplicitLeft = 96
+      OnDblClick = PNLStatusColorDblClick
     end
   end
   object IdTCPServer: TIdTCPServer
     Bindings = <>
     DefaultPort = 0
+    OnExecute = IdTCPServerExecute
     Left = 496
     Top = 8
   end
