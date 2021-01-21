@@ -4,7 +4,7 @@ object FChatServer: TFChatServer
   BorderStyle = bsSingle
   Caption = '-NullEdge- Chat Server'
   ClientHeight = 312
-  ClientWidth = 574
+  ClientWidth = 546
   Color = 3419703
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,13 +12,14 @@ object FChatServer: TFChatServer
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PNLHistory: TPanel
     AlignWithMargins = True
     Left = 3
     Top = 103
-    Width = 568
+    Width = 540
     Height = 206
     Align = alBottom
     Alignment = taLeftJustify
@@ -39,7 +40,7 @@ object FChatServer: TFChatServer
     object MEMHistory: TMemo
       Left = 0
       Top = 22
-      Width = 568
+      Width = 540
       Height = 184
       Align = alBottom
       Font.Charset = DEFAULT_CHARSET
@@ -86,6 +87,7 @@ object FChatServer: TFChatServer
   object IdTCPServer: TIdTCPServer
     Bindings = <>
     DefaultPort = 0
+    OnConnect = IdTCPServerConnect
     OnExecute = IdTCPServerExecute
     Left = 496
     Top = 8

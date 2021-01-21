@@ -6,16 +6,16 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
   IdBaseComponent, IdComponent, IdCustomTCPServer, IdTCPServer, Vcl.AppEvnts,
-  IdContext;
+  IdContext, IdTCPConnection, IdGlobal;
 
 type
-  TChatThread = class(TThread)
-  private
-  protected
-    procedure Execute; override;
-  public
-    constructor Create();
-  end;
+  {Custom Record to store the connected user informatin}
+  PChatUser = ^ TChatUser;
+  TChatUser = record
+  Nickname: ShortString;
+  IP: ShortString;
+  Connection: TidTCPConnection;
+end;
 
 type
   TFChatServer = class(TForm)
@@ -29,7 +29,9 @@ type
     procedure ApplicationEventsMinimize(Sender: TObject);
     procedure TIconMainDblClick(Sender: TObject);
     procedure PNLStatusColorDblClick(Sender: TObject);
+    procedure IdTCPServerConnect(AContext: TIdContext);
     procedure IdTCPServerExecute(AContext: TIdContext);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,20 +40,11 @@ type
 
 var
   FChatServer: TFChatServer;
+  userList: TList;
 
 implementation
 
 {$R *.dfm}
-
-Constructor TChatTHread.Create();
-begin
-  //
-end;
-
-Procedure TChatTHread.Execute;
-begin
-  //
-end;
 
 procedure TFChatServer.ApplicationEventsMinimize(Sender: TObject);
 begin
@@ -64,24 +57,49 @@ begin
   TIconMain.ShowBalloonHint;
 end;
 
+procedure TFChatServer.FormCreate(Sender: TObject);
+begin
+  userList := TList.Create;
+end;
+
+procedure TFChatServer.IdTCPServerConnect(AContext: TIdContext);
+var
+  CurrentConnection: PChatUser;
+  Command: String;
+  Data: String;
+begin
+  AContext.Connection.Socket.WriteLn('What is your name?');
+
+
+  Command := AContext.Connection.IOHandler.ReadLn(IndyTextEncoding_UTF8);
+  AContext.Connection.IOHandler.DefStringEncoding := IndyTextEncoding_UTF8;
+
+  GetMem(CurrentConnection,SizeOf(TChatUser));
+
+  CurrentConnection.Connection := AContext.Connection;
+  CurrentConnection.IP := AContext.Connection.Socket.Binding.PeerIP;
+  CurrentConnection.Nickname := Command;
+
+  AContext.Data := TObject(CurrentConnection);
+  userList.Add(CurrentConnection);
+
+  // Receive response from client
+  ///Data := AContext.Connection.Socket.ReadLn;
+
+  // Send a response to the client
+  AContext.Connection.Socket.WriteLn('Hello, ' + Command + '.');
+  AContext.Connection.Socket.WriteLn('Would you like to play a game?');
+
+end;
+
 procedure TFChatServer.IdTCPServerExecute(AContext: TIdContext);
 var
- Data : String;
- Ss : TStringStream;
+Command: String;
 begin
-  {Read Incoming Stream on Server Execute}
-  Try
-     Data := '';
-     Ss := nil;
-     Try
-       Ss := TStringStream.Create('');
-       Ss.Position := 0;
-       AContext.Connection.IOHandler.ReadStream(Ss);
-     Finally
+//do something later
+  Command := AContext.Connection.IOHandler.ReadLn(IndyTextEncoding_UTF8);
 
-     End;
-    Finally
-    End;
+  AContext.Connection.Socket.WriteLn('you wrote '+Command);
 end;
 
 procedure TFChatServer.PNLStatusColorDblClick(Sender: TObject);
