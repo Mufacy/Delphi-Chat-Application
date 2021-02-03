@@ -2,7 +2,8 @@ program ServerApp;
 
 uses
   Vcl.Forms,
-  UChatServer in 'UChatServer.pas' {FChatServer};
+  UChatServer in 'UChatServer.pas' {FChatServer},
+  UTools in '..\UTools.pas';
 
 {$R *.res}
 

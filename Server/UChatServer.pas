@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
   IdBaseComponent, IdComponent, IdCustomTCPServer, IdTCPServer, Vcl.AppEvnts,
-  IdContext, IdTCPConnection, IdGlobal;
+  IdContext, IdTCPConnection, IdGlobal, UTools;
 
 type
   {Custom Record to store the connected user informatin}
@@ -67,11 +67,11 @@ var
   CurrentConnection: PChatUser;
   Command: String;
   Data: String;
+  ContextInput: String;
 begin
   AContext.Connection.Socket.WriteLn('What is your name?');
-
-
-  Command := AContext.Connection.IOHandler.ReadLn(IndyTextEncoding_UTF8);
+  ContextInput := AContext.Connection.IOHandler.ReadLn(IndyTextEncoding_UTF8);
+  Command :=extractmessage(ContextInput);
   AContext.Connection.IOHandler.DefStringEncoding := IndyTextEncoding_UTF8;
 
   GetMem(CurrentConnection,SizeOf(TChatUser));
@@ -83,10 +83,7 @@ begin
   AContext.Data := TObject(CurrentConnection);
   userList.Add(CurrentConnection);
 
-  // Receive response from client
-  ///Data := AContext.Connection.Socket.ReadLn;
 
-  // Send a response to the client
   AContext.Connection.Socket.WriteLn('Hello, ' + Command + '.');
   AContext.Connection.Socket.WriteLn('Would you like to play a game?');
 
